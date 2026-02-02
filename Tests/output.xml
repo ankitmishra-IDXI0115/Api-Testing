@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.0 on win32)" generated="2026-02-02T12:02:48.047304" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Users" source="C:\Users\Ankit.Mishra\Desktop\Api Testing\Tests\test_users.robot">
+<test id="s1-t1" name="Get_Todo" line="12">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:48.162514" level="INFO">Creating Session using : alias=mysession, url=https://jsonplaceholder.typicode.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-02-02T12:02:48.162243" elapsed="0.000556"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:48.391061" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/todos/10 
+ path_url=/todos/10 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-02-02T12:02:48.391395" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/todos/10 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 02 Feb 2026 06:32:49 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'etag': 'W/"6d-BoXTpHBzlMEesiijbxzpwZqPXhI"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=vwWE3%2BPEVczvfhDEWCRK6ZShbscJIjV7q8G1r4T8ku0%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1769949586"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=vwWE3%2BPEVczvfhDEWCRK6ZShbscJIjV7q8G1r4T8ku0%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1769949586"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '986', 'x-ratelimit-reset': '1769949638', 'Age': '6761', 'cf-cache-status': 'HIT', 'Content-Encoding': 'zstd', 'CF-RAY': '9c77a74e0fc6406d-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 10,
+  "title": "illo est ratione doloremque quia maiores aut",
+  "completed": true
+} 
+ </msg>
+<msg time="2026-02-02T12:02:48.391578" level="INFO">C:\Users\Ankit.Mishra\Desktop\Api Testing\venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-02-02T12:02:48.392364" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/todos/${ID}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.163199" elapsed="0.229279"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status Code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.393246" elapsed="0.002196"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.397704" level="INFO">${newStatusCode} = 200</msg>
+<var>${newStatusCode}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.396144" elapsed="0.001629"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${statusCode}</arg>
+<arg>${newStatusCode}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.398485" elapsed="0.000787"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.401290" level="INFO">${body} = {
+  "userId": 1,
+  "id": 10,
+  "title": "illo est ratione doloremque quia maiores aut",
+  "completed": true
+}</msg>
+<var>${body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.399972" elapsed="0.001365"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>true</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.401872" elapsed="0.000729"/>
+</kw>
+<status status="PASS" start="2026-02-02T12:02:48.161353" elapsed="0.241894"/>
+</test>
+<test id="s1-t2" name="Post_Todo" line="25">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.405893" level="INFO">${body} = {'userId': '107', 'id': '107', 'title': 'Robot', 'completed': 'True'}</msg>
+<var>${body}</var>
+<arg>userId=107</arg>
+<arg>id=107</arg>
+<arg>title=Robot</arg>
+<arg>completed=True</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.405077" elapsed="0.000856"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:48.686728" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/posts 
+ path_url=/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '69', 'Content-Type': 'application/json'} 
+ body=b'{"userId": "107", "id": "107", "title": "Robot", "completed": "True"}' 
+ </msg>
+<msg time="2026-02-02T12:02:48.686949" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Mon, 02 Feb 2026 06:32:49 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '77', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"4d-eFth1qR/0zIPvQst9q1Nka+Cn2Q"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/posts/101', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=TR8j%2F5Epzx3fYJwDFSSXDL1NWn8%2F2Sc46gxHPcq0twE%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1770013969"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=TR8j%2F5Epzx3fYJwDFSSXDL1NWn8%2F2Sc46gxHPcq0twE%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1770013969"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '995', 'x-ratelimit-reset': '1770013982', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': '9c77a74e8847406d-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": "107",
+  "id": 101,
+  "title": "Robot",
+  "completed": "True"
+} 
+ </msg>
+<msg time="2026-02-02T12:02:48.687215" level="INFO">C:\Users\Ankit.Mishra\Desktop\Api Testing\venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-02-02T12:02:48.687982" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/posts</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.406345" elapsed="0.281724"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status Code : ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.688902" elapsed="0.001884"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response : ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.691460" elapsed="0.002040"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.695660" level="INFO">${newStatusCode} = 201</msg>
+<var>${newStatusCode}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.694223" elapsed="0.001486"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${newStatusCode}</arg>
+<arg>${postStatusCode}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.696112" elapsed="0.000321"/>
+</kw>
+<status status="PASS" start="2026-02-02T12:02:48.404490" elapsed="0.292288"/>
+</test>
+<test id="s1-t3" name="Patch_Todo" line="35">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.698397" level="INFO">${body} = {'title': 'Updated Robot Title', 'completed': 'True'}</msg>
+<var>${body}</var>
+<arg>title=Updated Robot Title</arg>
+<arg>completed=True</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.697975" elapsed="0.000456"/>
+</kw>
+<kw name="PATCH On Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:48.984995" level="INFO">PATCH Request : url=https://jsonplaceholder.typicode.com/posts/10 
+ path_url=/posts/10 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '53', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Updated Robot Title", "completed": "True"}' 
+ </msg>
+<msg time="2026-02-02T12:02:48.985086" level="INFO">PATCH Response : url=https://jsonplaceholder.typicode.com/posts/10 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 02 Feb 2026 06:32:50 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"e8-2KlK/SwQCZ2QmnWuCZBnoAv7hoY"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=OXL1zqwqBZdid0icj8HJR1fzkZCkRMV8xqGCBqEpu8g%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1770013970"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=OXL1zqwqBZdid0icj8HJR1fzkZCkRMV8xqGCBqEpu8g%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1770013970"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '994', 'x-ratelimit-reset': '1770013982', 'cf-cache-status': 'DYNAMIC', 'Content-Encoding': 'zstd', 'CF-RAY': '9c77a75059af406d-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": 1,
+  "id": 10,
+  "title": "Updated Robot Title",
+  "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error",
+  "completed": "True"
+} 
+ </msg>
+<msg time="2026-02-02T12:02:48.985146" level="INFO">C:\Users\Ankit.Mishra\Desktop\Api Testing\venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-02-02T12:02:48.985533" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/posts/${ID}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a PATCH request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.698795" elapsed="0.286775"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status Code : ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.985969" elapsed="0.000777"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response : ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.987038" elapsed="0.000755"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.988573" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${statusCode}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.988093" elapsed="0.000533"/>
+</kw>
+<status status="PASS" start="2026-02-02T12:02:48.697479" elapsed="0.291436"/>
+</test>
+<test id="s1-t4" name="Update_Todo_PUT" line="44">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-02T12:02:48.990256" level="INFO">${body} = {'userId': '1', 'id': '1', 'title': 'Updated via PUT', 'completed': 'True'}</msg>
+<var>${body}</var>
+<arg>userId=1</arg>
+<arg>id=1</arg>
+<arg>title=Updated via PUT</arg>
+<arg>completed=True</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.989941" elapsed="0.000340"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:49.721045" level="INFO">PUT Request : url=https://jsonplaceholder.typicode.com/posts/10 
+ path_url=/posts/10 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '75', 'Content-Type': 'application/json'} 
+ body=b'{"userId": "1", "id": "1", "title": "Updated via PUT", "completed": "True"}' 
+ </msg>
+<msg time="2026-02-02T12:02:49.721139" level="INFO">PUT Response : url=https://jsonplaceholder.typicode.com/posts/10 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 02 Feb 2026 06:32:50 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"54-BPv4AscOBUcG+ZueLKaV9cYIagg"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=OXL1zqwqBZdid0icj8HJR1fzkZCkRMV8xqGCBqEpu8g%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1770013970"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=OXL1zqwqBZdid0icj8HJR1fzkZCkRMV8xqGCBqEpu8g%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1770013970"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '993', 'x-ratelimit-reset': '1770013982', 'cf-cache-status': 'DYNAMIC', 'Content-Encoding': 'zstd', 'CF-RAY': '9c77a7522b22406d-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "userId": "1",
+  "id": 10,
+  "title": "Updated via PUT",
+  "completed": "True"
+} 
+ </msg>
+<msg time="2026-02-02T12:02:49.721196" level="INFO">C:\Users\Ankit.Mishra\Desktop\Api Testing\venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-02-02T12:02:49.721640" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/posts/${ID}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-02T12:02:48.990622" elapsed="0.731047"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status Code : ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:49.722021" elapsed="0.000658"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response : ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:49.722972" elapsed="0.000581"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-02-02T12:02:49.724274" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${statusCode}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-02-02T12:02:49.723859" elapsed="0.000458"/>
+</kw>
+<status status="PASS" start="2026-02-02T12:02:48.989490" elapsed="0.735125"/>
+</test>
+<test id="s1-t5" name="Delete_Todo" line="58">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2026-02-02T12:02:50.006534" level="INFO">DELETE Request : url=https://jsonplaceholder.typicode.com/posts/1 
+ path_url=/posts/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-02-02T12:02:50.006726" level="INFO">DELETE Response : url=https://jsonplaceholder.typicode.com/posts/1 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 02 Feb 2026 06:32:51 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'no-cache', 'etag': 'W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=G4cusmdoFzrdT5ZDLG86R1M578v55NzyFyczCGoTqRw%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1770013971"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=G4cusmdoFzrdT5ZDLG86R1M578v55NzyFyczCGoTqRw%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1770013971"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '992', 'x-ratelimit-reset': '1770013982', 'cf-cache-status': 'DYNAMIC', 'Content-Encoding': 'zstd', 'CF-RAY': '9c77a756cf02406d-SIN', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={} 
+ </msg>
+<msg time="2026-02-02T12:02:50.006864" level="INFO">C:\Users\Ankit.Mishra\Desktop\Api Testing\venv\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'jsonplaceholder.typicode.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-02-02T12:02:50.007500" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/posts/1</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-02T12:02:49.725875" elapsed="0.281698"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status Code : ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-02-02T12:02:50.008248" elapsed="0.001282"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-02-02T12:02:50.010999" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>${statusCode}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-02-02T12:02:50.010029" elapsed="0.001074"/>
+</kw>
+<status status="PASS" start="2026-02-02T12:02:49.725483" elapsed="0.286179"/>
+</test>
+<status status="PASS" start="2026-02-02T12:02:48.049666" elapsed="1.963780"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Users" id="s1" pass="5" fail="0" skip="0">Test Users</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
