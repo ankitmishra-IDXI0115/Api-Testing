@@ -1,40 +1,43 @@
 *** Settings ***
 Library    RequestsLibrary
 Library    Collections
+Variables    ../environment.py
+Variables    ../PageObjects/apivariables.py
+
+Resource    ../resources/keywords.resource
+
+Test Setup    Create Sessions
 
 *** Variables ***
-${BASE_URL}    https://jsonplaceholder.typicode.com
-${ID}          10
-${statusCode}    200
-${postStatusCode}    201
+#${ID}          10
+#${statusCode}    200
+#${postStatusCode}    201
+
 
 *** Test Cases ***
 Get_Todo
-    Create Session    mysession    ${BASE_URL}
-    ${response}=    GET On Session    mysession    /todos/${ID}
+    ${response}=    GET On Session    ${SESSION}   ${todos_endpoint}${ID}
     Log To Console    Status Code: ${response.status_code}
     #Log To Console    Response Body: ${response.text}
     #Log To Console    Headers: ${response.headers}
 
-    ${newStatusCode}=    convert To string    ${response.status_code}
-    should be equal    ${statusCode}    ${newStatusCode}
+    Should be equal as integers     ${response.status_code}     ${statusCode}
 
     ${body}    convert to string    ${response.content}
     should contain    ${body}    true
 
 Post_Todo
     ${body}=    Create Dictionary    userId=107    id=107    title=Robot    completed=True
-    ${response}=    Post On Session    mysession    /posts    json=${body}
+    ${response}=    Post On Session    ${SESSION}    ${posts}    json=${body}
 
     Log To Console    Status Code : ${response.status_code}
     Log To Console    Response : ${response.json()}
 
-    ${newStatusCode}     convert to String    ${response.status_code}
-    should be equal    ${newStatusCode}    ${postStatusCode}
+    Should Be Equal As Integers    ${response.status_code}    ${postStatusCode}
 
 Patch_Todo
     ${body}=    Create Dictionary    title=Updated Robot Title    completed=True
-    ${response}=    Patch On Session    mysession    /posts/${ID}   json=${body}
+    ${response}=    Patch On Session    mysession    ${posts}/${ID}   json=${body}
 
     Log To Console    Status Code : ${response.status_code}
     Log To Console    Response : ${response.json()}
@@ -48,7 +51,7 @@ Update_Todo_PUT
     ...    title=Updated via PUT
     ...    completed=True
 
-    ${response}=    Put On Session    mysession    /posts/${ID}   json=${body}
+    ${response}=    Put On Session    ${SESSION}    ${posts}/${ID}   json=${body}
 
     Log To Console    Status Code : ${response.status_code}
     Log To Console    Response : ${response.json()}
@@ -56,7 +59,7 @@ Update_Todo_PUT
     Should Be Equal As Integers    ${response.status_code}    ${statusCode}
 
 Delete_Todo
-    ${response}=    Delete On Session    mysession    /posts/1
+    ${response}=    Delete On Session    ${SESSION}    ${posts}/${ID}
     Log To Console    Status Code : ${response.status_code}
 
     Should Be Equal As Integers    ${response.status_code}    ${statusCode}
